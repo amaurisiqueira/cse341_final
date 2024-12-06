@@ -6,7 +6,7 @@ env.config();
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "CSE341 Project 2",
+      title: "CSE341 Final Project",
       version: "0.0.1",
       contact: {
         name: "Amauri Siqueira",
@@ -21,7 +21,7 @@ env.config();
       },
       {
         url: "https://cse341-project1-5jlz.onrender.com",
-        description: "Servidor de producción",
+        description: "Server Online",
       },
     ],
     components: {
