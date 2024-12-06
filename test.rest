@@ -1,0 +1,21 @@
+#### get all elements in a local project
+GET http://localhost:8089/club/getallw
+
+##### get all elements from Render
+GET https://cse341-project2-rb86.onrender.com/club/getall HTTP/1.1
+
+##### create new contact localhost
+POST https://cse341-project2-rb86.onrender.com/club/add HTTP/1.1
+
+Content-Type: application/json
+
+{
+  "name": "FC Barcelona",
+  "country": "Spain",
+  "city": "Barcelona",
+  "stadium": "Camp Nou",
+  "capacity": 99354,
+  "foundedYear": "hyab",
+  "coach": "0
+}
+
