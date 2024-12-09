@@ -4,12 +4,14 @@ const passport = require("passport");
 const app = express();
 const footballClubsRouter = require("./routers/footballClubs");
 const matchesRouter = require("./routers/matches");
+const fanProfileRouter = require("./routers/fanProfile");
+
 const loginRouter = require("./routers/index");
 const cors = require("cors");
 const env = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
-const authMiddleware = require('./utils/checkAuth');
+const authMiddleware = require("./utils/checkAuth");
 
 const GitHubStrategy = require("passport-github2").Strategy;
 env.config();
@@ -17,7 +19,6 @@ env.config();
 const mongodb = require("./connections/conection");
 //const bodyParser = require("body-parser");
 
-/*
 app.use(
   "/api-docs",
   swaggerUi.serve,
@@ -27,20 +28,6 @@ app.use(
       scopes: "read:user user:email",
       usePkceWithAuthorizationCodeGrant: true, // Habilita PKCE
     },
-    oauth2RedirectUrl: "http://localhost:8089/api-docs/oauth2-redirect.html", // Ruta de redirección de Swagger
-  })
-);
-*/
-
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec, {
-    oauth: {
-      clientId: process.env.GITHUB_CLIENT_ID, // Solo necesitas el clientId
-      scopes: "read:user user:email",
-      usePkceWithAuthorizationCodeGrant: true, // Habilita PKCE
-    }
   })
 );
 // Middleware para cabeceras de CORS (si es necesario, podría eliminarse por la configuración de CORS anterior)
@@ -79,7 +66,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // Configuración de Passport con GitHub Strategy
 passport.use(
   new GitHubStrategy(
@@ -105,10 +91,6 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-
-
-
-
 // Middleware para analizar el cuerpo de las solicitudes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -118,8 +100,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", loginRouter);
 app.use("/club", authMiddleware, footballClubsRouter);
 app.use("/matches", authMiddleware, matchesRouter);
-
-
+app.use("/fanprofile", authMiddleware, fanProfileRouter);
 
 // Middleware para manejar rutas no definidas
 app.use((req, res, next) => {
@@ -136,12 +117,6 @@ app.use((error, req, res, next) => {
     },
   });
 });
-
-
-
-
-    
-
 
 // Conexión a MongoDB y arranque del servidor
 mongodb.initDb((err) => {
