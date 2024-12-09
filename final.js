@@ -5,6 +5,7 @@ const app = express();
 const footballClubsRouter = require("./routers/footballClubs");
 const matchesRouter = require("./routers/matches");
 const fanProfileRouter = require("./routers/fanProfile");
+const fanInteraction = require('./routers/fanInteraction');
 
 const loginRouter = require("./routers/index");
 const cors = require("cors");
@@ -101,6 +102,8 @@ app.use("/", loginRouter);
 app.use("/club", authMiddleware, footballClubsRouter);
 app.use("/matches", authMiddleware, matchesRouter);
 app.use("/fanprofile", authMiddleware, fanProfileRouter);
+app.use("/faninteraction", authMiddleware, fanInteraction);
+
 
 // Middleware para manejar rutas no definidas
 app.use((req, res, next) => {

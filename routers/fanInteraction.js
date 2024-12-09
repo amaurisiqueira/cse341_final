@@ -1,36 +1,36 @@
 const express = require("express");
-const fanProfileRouter = express.Router();
-const fanProfileController = require("../controllers/fanProfile");
+const fanInteractionRouter = express.Router();
+const fanInteractionController = require("../controllers/fanInteraction");
 
-fanProfileRouter.get("/getall", fanProfileController.getAll);
+fanInteractionRouter.get("/getall", fanInteractionController.getAll);
 /**
  * @swagger
- * /fanprofile/getall:
+ * /fanInteraction/getall:
  *    get:
- *      summary: Obtain a list of all fan profile collections.
+ *      summary: Obtain a list of all fan interaction collections.
  *      security:
  *        - githubAuth: []
  *      tags:
- *        - fan profile
+ *        - fan Interaction
  *      responses:
  *        200:
- *          description: List of fanprofile successfully retrieved
+ *          description: List of fan interaction successfully retrieved
  *        401:
  *          description: Not authorized
  *        500:
  *          description: Internal server error
  */
 
-fanProfileRouter.post("/add", fanProfileController.createFanProfile);
+fanInteractionRouter.post("/add", fanInteractionController.createFanInteraction);
 /**
  * @swagger
- * /fanprofile/add:
+ * /fanInteraction/add:
  *   post:
- *     summary: Create a new fan profile.
+ *     summary: Create a new fan interaction.
  *     security:
  *       - githubAuth: []
  *     tags:
- *       - fan profile
+ *       - fan Interaction
  *     requestBody:
  *       required: true
  *       content:
@@ -41,12 +41,15 @@ fanProfileRouter.post("/add", fanProfileController.createFanProfile);
  *               name:
  *                 type: string
  *                 example: "Juanito"
- *               favoriteClubs:
+ *               interactionType:
  *                 type: string
- *                 example: "U Chile"
- *               preferences:
+ *                 example: "New game"
+ *               content:
  *                 type: string
- *                 example: "La U de chile es la mejor en su categoria"
+ *                 example: "Habra partido entre la la U y Colo Colo"
+ *               date:
+ *                 type: numeric
+ *                 example: 2024-12-12
  *
  *     responses:
  *       204:
@@ -59,21 +62,21 @@ fanProfileRouter.post("/add", fanProfileController.createFanProfile);
  *         description: Internal server error.
  */
 
-fanProfileRouter.put("/:id", fanProfileController.updateFanProfile);
+fanInteractionRouter.put("/:id", fanInteractionController.updateFanInteraction);
 /**
  * @swagger
- * /fanprofile/{id}:
+ * /fanInteraction/{id}:
  *   put:
- *     summary: Update an existing fan profile.
+ *     summary: Update an existing fan interaction.
  *     security:
  *       - githubAuth: []
  *     tags:
- *       - fan profile
+ *       - fan Interaction
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         description: The ID of the fan profile to update.
+ *         description: The ID of the fan interaction to update.
  *         schema:
  *           type: string
  *           example: "67439c820e89da4a29d66186"
@@ -87,12 +90,15 @@ fanProfileRouter.put("/:id", fanProfileController.updateFanProfile);
  *               name:
  *                 type: string
  *                 example: "Juanito"
- *               favoriteClubs:
+ *               interactionType:
  *                 type: string
- *                 example: "U Chile"
- *               preferences:
+ *                 example: "New game updated"
+ *               content:
  *                 type: string
- *                 example: "La U de chile Perdio!"
+ *                 example: "Habra partido entre la la U y Colo Colo new Date"
+ *               date:
+ *                 type: numeric
+ *                 example: 2024-12-22
  *
  *     responses:
  *       204:
@@ -105,21 +111,21 @@ fanProfileRouter.put("/:id", fanProfileController.updateFanProfile);
  *         description: Internal server error.
  */
 
-fanProfileRouter.delete("/:id", fanProfileController.deleteFanProfile);
+fanInteractionRouter.delete("/:id", fanInteractionController.deleteFanInteraction);
 /**
  * @swagger
- * /fanprofile/{id}:
+ * /fanInteraction/{id}:
  *   delete:
- *     summary: Delete a fan profile by ID.
+ *     summary: Delete a fan interaction by ID.
  *     security:
  *       - githubAuth: []
  *     tags:
- *       - fan profile
+ *       - fan Interaction
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         description: The ID of the fan profile to delete.
+ *         description: The ID of the fan interaction to delete.
  *         schema:
  *           type: string
  *           example: "67437a358eb4f184bc632bd1"
@@ -134,4 +140,4 @@ fanProfileRouter.delete("/:id", fanProfileController.deleteFanProfile);
  *         description: Internal server error.
  */
 
-module.exports = fanProfileRouter;
+module.exports = fanInteractionRouter;
