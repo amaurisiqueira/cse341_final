@@ -107,6 +107,7 @@ app.use("/faninteraction", authMiddleware, fanInteraction);
 
 // Middleware para manejar rutas no definidas
 app.use((req, res, next) => {
+  console.log('Ruta no encontrada:', req.url); 
   const error = new Error("Unknown route!");
   error.status = 404;
   next(error);
@@ -132,3 +133,7 @@ mongodb.initDb((err) => {
     });
   }
 });
+
+
+
+module.exports = app;
