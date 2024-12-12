@@ -1,9 +1,9 @@
 const mongodb = require("../connections/conection");
-const DatabaseName = require("../utils/getKey");
+
 const getAll = async (req, res) => {
   const result = await mongodb
     .getDatabase()
-    .db(DatabaseName)
+    .db("final")
     .collection("maches")
     .find();
 
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 const createSingle = async (match) => {
   const result = await mongodb
     .getDatabase()
-    .db(DatabaseName)
+    .db("final")
     .collection("maches")
     .insertOne(match);
 
@@ -23,7 +23,7 @@ const createSingle = async (match) => {
 const updateSingle = async (matchId, match) => {
   return (result = await mongodb
     .getDatabase()
-    .db(DatabaseName)
+    .db("final")
     .collection("maches")
     .replaceOne({ _id: matchId }, match));
 };
@@ -31,7 +31,7 @@ const updateSingle = async (matchId, match) => {
 const deleteSingle = async (matchId) => {
   return (result = await mongodb
     .getDatabase()
-    .db(DatabaseName)
+    .db("final")
     .collection("maches")
     .deleteOne({ _id: matchId }));
 };

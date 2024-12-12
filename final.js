@@ -5,7 +5,7 @@ const app = express();
 const footballClubsRouter = require("./routers/footballClubs");
 const matchesRouter = require("./routers/matches");
 const fanProfileRouter = require("./routers/fanProfile");
-const fanInteraction = require('./routers/fanInteraction');
+const fanInteraction = require("./routers/fanInteraction");
 
 const loginRouter = require("./routers/index");
 const cors = require("cors");
@@ -104,10 +104,9 @@ app.use("/matches", authMiddleware, matchesRouter);
 app.use("/fanprofile", authMiddleware, fanProfileRouter);
 app.use("/faninteraction", authMiddleware, fanInteraction);
 
-
 // Middleware para manejar rutas no definidas
 app.use((req, res, next) => {
-  console.log('Ruta no encontrada:', req.url); 
+  console.log("Ruta no encontrada:", req.url);
   const error = new Error("Unknown route!");
   error.status = 404;
   next(error);
@@ -133,7 +132,5 @@ mongodb.initDb((err) => {
     });
   }
 });
-
-
 
 module.exports = app;
