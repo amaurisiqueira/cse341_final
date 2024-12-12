@@ -17,20 +17,9 @@ const authMiddleware = require("./utils/checkAuth");
 const GitHubStrategy = require("passport-github2").Strategy;
 env.config();
 
- const {connectToDatabase, getDatabase} = require("./connections/conection");
-//const bodyParser = require("body-parser");
+// Conexión a MongoDB
+// const {connectToDatabase, getDatabase} = require("./connections/conection");
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec, {
-    oauth: {
-      clientId: process.env.GITHUB_CLIENT_ID, // Solo necesitas el clientId
-      scopes: "read:user user:email",
-      usePkceWithAuthorizationCodeGrant: true, // Habilita PKCE
-    },
-  })
-);
 // Middleware para cabeceras de CORS (si es necesario, podría eliminarse por la configuración de CORS anterior)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -76,7 +65,6 @@ passport.use(
       callbackURL: process.env.CALLBACKURL,
     },
     function (accessToken, refreshToken, profile, done) {
-      //    console.log("Client Secret:", process.env.GITHUB_CLIENT_SECRET);
       return done(null, profile);
     }
   )
@@ -121,17 +109,5 @@ app.use((error, req, res, next) => {
   });
 });
 
-
-// Conexión a MongoDB y arranque del servidor
-connectToDatabase();
-
-
-
-const port = process.env.PORT || 8089;
-    app.listen(port, () => {
-      console.log(`Servidor escuchando en el puerto ${port}`);
-    });
-  
-
-
+// Exporta la aplicación Express para ser utilizada en las pruebas
 module.exports = app;

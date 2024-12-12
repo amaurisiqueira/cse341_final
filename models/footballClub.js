@@ -3,7 +3,7 @@ const mongodb = require("../connections/conection");
 const getAll = async (req, res) => {
   const result = await mongodb
     .getDatabase()
-    .db("final")
+    // .db("final")
     .collection("footballClubs")
     .find();
   return result;
@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
 const createSingle = async (club) => {
   const result = await mongodb
     .getDatabase()
-    .db("final")
+    // .db("final")
     .collection("footballClubs")
     .insertOne(club);
 
@@ -22,7 +22,7 @@ const createSingle = async (club) => {
 const updateSingle = async (clubId, club) => {
   return (result = await mongodb
     .getDatabase()
-    .db("final")
+    // .db("final")
     .collection("footballClubs")
     .replaceOne({ _id: clubId }, club));
 };
@@ -30,7 +30,7 @@ const updateSingle = async (clubId, club) => {
 const deleteSingle = async (clubId) => {
   return (result = await mongodb
     .getDatabase()
-    .db("final")
+    // .db("final")
     .collection("footballClubs")
     .deleteOne({ _id: clubId }));
 };

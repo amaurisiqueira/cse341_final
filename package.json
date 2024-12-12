@@ -4,7 +4,7 @@
   "description": "",
   "main": "final.js",
   "scripts": {
-    "test": "jest",
+    "test": "MONGODB_URI=mongodb+srv://amauriferreirasiqueira:7gSdQD6DpOzO6mLu@cluster0.eopgd.mongodb.net/final  jest --verbose --detectOpenHandles",
     "start": "nodemon final.js",
     "debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand"
   },
