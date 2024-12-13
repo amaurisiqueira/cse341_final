@@ -13,7 +13,6 @@ const getAll = async (req, res) => {
 const createSingle = async (match) => {
   const result = await mongodb
     .getDatabase()
-    // .db("final")
     .collection("maches")
     .insertOne(match);
 
