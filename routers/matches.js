@@ -87,7 +87,7 @@ matchesRouter.put("/:id", matchesController.updateMatch);
  *         description: The ID of the match to update.
  *         schema:
  *           type: string
- *           example: "67439c820e89da4a29d66186"
+ *           example: "675c4c65a855592840e6a056"
  *     requestBody:
  *       required: true
  *       content:
@@ -144,7 +144,7 @@ matchesRouter.delete("/:id", matchesController.deleteMatch);
  *         description: The ID of the matches to delete.
  *         schema:
  *           type: string
- *           example: "67437a358eb4f184bc632bd1"
+ *           example: "675c4c65a855592840e6a056"
  *     responses:
  *       204:
  *         description: match deleted successfully.

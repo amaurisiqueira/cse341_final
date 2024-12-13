@@ -9,18 +9,30 @@ let client;
 // Función para establecer la conexión a MongoDB
 const connectToDatabase = async () => {
   if (database) {
-    console.log("DB is already initialized!");
+    console.log("conection -- connectToDatabase--  DB is already initialized!");
     return database;
   }
 
   try {
     client = await MongoClient.connect(process.env.MONGODB_URI); // Asigna el cliente a la variable client
     database = client.db("final");
+    console.log("conection -- connectToDatabase--  DB is connecting..");
     return database;
   } catch (err) {
     throw err;
   }
 };
+
+// Función para cerrar la conexión a MongoDB
+const closeConnection = async () => {
+
+  console.log("conection --closeConnection  DB is closing..");
+  if (client) {
+    await client.close();
+  }
+  console.log("conection --closeConnection  DB is closed..");
+};
+
 
 // Función para obtener la base de datos
 const getDatabase = () => {
@@ -30,14 +42,6 @@ const getDatabase = () => {
     throw Error("Database not initialized");
   }
   return database;
-};
-
-
-// Función para cerrar la conexión a MongoDB
-const closeConnection = async () => {
-  if (client) {
-    await client.close();
-  }
 };
 
 

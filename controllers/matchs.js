@@ -1,4 +1,5 @@
-const ObjectId = require("mongodb").ObjectId;
+//const ObjectId = require("mongodb").ObjectId;
+const { ObjectId } = require("mongodb");
 const matchData = require("../models/match");
 const validateMatch = require("../validation/validateMatch");
 const { validationResult } = require("express-validator");
@@ -82,7 +83,7 @@ const updateMatch = async (req, res) => {
       referee: req.body.referee,
       date: req.body.date,
     };
-    const clubId = new ObjectId(req.params.id);
+    const clubId =    ObjectId.createFromHexString(req.params.id);
     const result = await matchData.updateSingle(clubId, match);
 
     if (result.acknowledged) {
@@ -97,10 +98,20 @@ const updateMatch = async (req, res) => {
 };
 const deleteMatch = async (req, res) => {
   try {
-    const clubId = new ObjectId(req.params.id);
+    // const clubId =   ObjectId.createFromHexString(req.params.id);
+    const clubId =   req.params.id;
+
+    console.log(`  matchs -- deleteMatch -- receive ID: ${clubId}`);
+
+
     const result = await matchData.deleteSingle(clubId);
 
-    if (result.deletedCount) {
+    console.log(`  matchs -- deleteMatch --  result: ${result}`);
+
+    console.log(`  matchs -- deleteMatch --  result.deletedCount): ${result}`);
+
+    //if (result.deletedCount) {
+    if (result &&  result.deletedCount) {
       res.status(204).send();
     } else {
       res.status(404).json({ error: "Bad request, invalid input" });
